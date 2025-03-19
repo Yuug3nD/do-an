@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/Back_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:background="@android:color/transparent"
+        android:paddingEnd="30dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/Register_Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký"
+        android:textSize="30sp"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Back_Register"
+        />
+
+    <EditText
+        android:id="@+id/Name_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Tên hiển thị"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Register_Header"
+        />
+    <EditText
+        android:id="@+id/Email_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Name_Register"
+        />
+
+    <EditText
+        android:id="@+id/Password_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="mật khẩu"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Email_Register"
+        />
+    <EditText
+        android:id="@+id/Check_Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Xác nhận mật khẩu"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Password_Register"
+        />
+    <Button
+        android:id="@+id/Register"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Đăng ký"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:backgroundTint="#EA8E14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Check_Password"
+        android:layout_marginTop="25dp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

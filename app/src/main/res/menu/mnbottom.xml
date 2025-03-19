@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Food and Drink"
+        android:id="@+id/food"
+        android:icon="@drawable/food"/>
+    <item android:title="Share"
+        android:id="@+id/share"
+        android:icon="@drawable/share"/>
+    <item android:title="Setting"
+        android:id="@+id/setting"
+        android:icon="@drawable/other"/>
+</menu>

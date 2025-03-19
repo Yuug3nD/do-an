@@ -1,0 +1,140 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeActivity">
+
+    <ScrollView
+        android:id="@+id/scroll_Recipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/img_chitiet"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/monngon3"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="top"
+                    android:padding="16dp"
+                    android:background="@android:color/transparent">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/baseline_arrow_back_24"
+                        android:background="@null"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <ImageButton
+                        android:id="@+id/btn_action"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/baseline_edit_24"
+                        android:background="@null"/>
+                    <ImageButton
+                        android:id="@+id/delete"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/baseline_delete_24"
+                        android:background="@null"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Công thức gà xào sả ớt"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/clock"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/clock_icon"/>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="6dp"
+                    android:text="30 phút"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nguyên liệu"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:paddingTop="16dp"
+                android:paddingLeft="25dp"
+                />
+            <TextView
+                android:id="@+id/NguyenLieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biển"
+                android:textColor="@color/black"
+                android:paddingTop="16dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cách làm"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:paddingTop="16dp"
+                android:paddingLeft="25dp"/>
+            <TextView
+                android:id="@+id/CachLam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biểnSửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biểnSửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biển"
+                android:textColor="@color/black"
+                android:paddingTop="16dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

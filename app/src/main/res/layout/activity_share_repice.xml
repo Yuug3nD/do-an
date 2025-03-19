@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Share_RepiceActivity"
+    >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/Toolbar_share"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="50dp"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_LenSong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lên Sóng"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#FF9800"
+                    />
+                <ImageButton
+                    android:id="@+id/btn_Back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    android:backgroundTint="@color/white"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+
+            <FrameLayout
+                android:id="@+id/frlayout_share"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/Toolbar_share"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+                <ImageView
+                    android:id="@+id/anh_mon_an"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/share2" />
+
+                <TextView
+                    android:id="@+id/img_Share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Đăng hình đại diện món ăn"
+                    android:textColor="#A3A1A1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/baseline_camera_alt_24"
+                    android:drawablePadding="8dp"
+                    />
+            </FrameLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crView_TenMon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/frlayout_share"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="16dp"
+                android:layout_marginTop="25dp"
+                >
+                <EditText
+                    android:id="@+id/edtTex_TenMon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#43FFF8E8"
+                    android:hint="Tên món: Món canh ngon nhất nhà mình"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColorHint="#CAC1C1"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:gravity="top"
+                    />
+            </androidx.cardview.widget.CardView>
+            <Spinner
+                android:id="@+id/spinner_Category"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/crView_TenMon"
+                android:layout_marginTop="25dp"
+                android:layout_margin="20dp"
+
+                />
+
+            <TextView
+                android:id="@+id/Header_ThoiGianNau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thời gian nấu"
+                android:layout_marginTop="25dp"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_Category"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_ThoiGianNau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/Header_ThoiGianNau"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="16dp">
+
+                <EditText
+                    android:id="@+id/ThoiGianNau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#43FFF8E8"
+                    android:hint="Bạn nấu món này mất bao lâu ?"
+                    android:textSize="15sp"
+                    android:textColorHint="#CAC1C1"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:gravity="top"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Header_NguyenLieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Nguyên liệu"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/cardView_ThoiGianNau"
+                android:layout_marginTop="25dp"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_NguyenLieu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/Header_NguyenLieu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="16dp"
+                >
+                <EditText
+                    android:id="@+id/Tex_NguyenLieu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#43FFF8E8"
+                    android:hint="Hãy nhập nguyên liệu ở đây nhé !"
+                    android:textSize="15sp"
+                    android:textColorHint="#CAC1C1"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:gravity="top"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Header_CachLam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Cách làm"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/cardView_NguyenLieu"
+                android:layout_marginTop="25dp"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_CachLam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/Header_CachLam"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="16dp"
+
+                >
+                <EditText
+                    android:id="@+id/Tex_CachLam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#43FFF8E8"
+                    android:hint="Chia sẻ cách làm của bạn ở đây !"
+                    android:textSize="15sp"
+                    android:textColorHint="#CAC1C1"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:gravity="top"
+                    />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

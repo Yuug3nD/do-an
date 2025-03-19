@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">do-an</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">369367058221-rno7gbg0hdtfls40dkt72jtbnb9t0cn0.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">445088185358267</string>
+    <string name="fb_login_protocol_scheme">fb445088185358267</string>
+    <string name="facebook_client_token">849452e4dc74d6d250882eb586cdb7de</string>
+</resources>
