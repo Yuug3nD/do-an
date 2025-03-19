@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SettingFragment"
-    android:background="@color/white"
+    android:background="#6FE5F5E6"
     >
 
 
@@ -19,6 +19,7 @@
         android:orientation="horizontal"
         android:background="@color/white"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#3EEAF4EA"
         >
 
         <ImageView
@@ -44,7 +45,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/baseline_keyboard_arrow_right_24"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#3EEAF4EA"
             android:layout_marginTop="5dp"
 
             />
@@ -69,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="#3EEAF4EA">
 
         <ImageView
             android:id="@+id/img_DieuKhoan"
@@ -94,7 +95,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/baseline_keyboard_arrow_right_24"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#3EEAF4EA"
             android:layout_marginTop="10dp"
 
             />
@@ -119,7 +120,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="#3EEAF4EA">
 
         <ImageView
             android:id="@+id/img_User"
@@ -165,7 +166,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="#3EEAF4EA">
 
         <ImageView
             android:id="@+id/img_Version"
@@ -213,7 +214,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="#3EEAF4EA"
         >
 
         <ImageView
@@ -240,7 +241,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/baseline_keyboard_arrow_right_24"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#3EEAF4EA"
 
             />
     </LinearLayout>
