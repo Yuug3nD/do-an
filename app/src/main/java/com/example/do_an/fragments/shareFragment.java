@@ -110,5 +110,10 @@ public class shareFragment extends Fragment {
             }
         });
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Tải lại dữ liệu khi Fragment được hiển thị lại
+        loadUserPosts();
+    }
 }
