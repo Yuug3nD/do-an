@@ -1,12 +1,8 @@
 package com.example.do_an.database;
 
-import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
-
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-
 import java.io.File;
 import java.util.Map;
 
@@ -19,9 +15,9 @@ public class CloudinaryHelper {
 
     public CloudinaryHelper() {
         cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "dn46brqbw", CLOUD_NAME,
-                "111584918739439", API_KEY,
-                "Tea-Xxrl0dvqpgKTD6hQHWkWWVY", API_SECRET,
+                "cloud_name", CLOUD_NAME,
+                "api_key", API_KEY,
+                "api_secret", API_SECRET,
                 "secure", true
         ));
     }
