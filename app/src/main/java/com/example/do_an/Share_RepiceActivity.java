@@ -18,10 +18,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +64,7 @@ public class Share_RepiceActivity extends AppCompatActivity {
     private EditText edtTenMon, edtThoiGian, edtNguyenLieu, edtCachLam;
     private Spinner spinnerCategory;
     private ImageView img;
-    private TextView imgShare;
+//    private TextView imgShare;
     private MaterialButton btnLenSong;
     private Uri imageUri;
     private static final int PICK_IMAGE = 1;
@@ -77,11 +81,17 @@ public class Share_RepiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_share_repice);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         // Ánh xạ Spinner
         edtTenMon = findViewById(R.id.edtTex_TenMon);
@@ -91,7 +101,7 @@ public class Share_RepiceActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinner_Category);
         img = findViewById(R.id.anh_mon_an);
         btnLenSong = findViewById(R.id.btn_LenSong);
-        imgShare = findViewById(R.id.img_Share);
+//        imgShare = findViewById(R.id.img_Share);
         btnBack = findViewById(R.id.btn_Back);
 
         // Khởi tạo Firebase
@@ -100,7 +110,7 @@ public class Share_RepiceActivity extends AppCompatActivity {
 
         imgurAPI = RetrofitClient.getClient().create(ImgurAPI.class);
 
-        imgShare.setOnClickListener(v -> openGallery());
+//        imgShare.setOnClickListener(v -> openGallery());
         // Sự kiện chọn ảnh
 //        imgShare.setOnClickListener(new View.OnClickListener() {
 //            @Override

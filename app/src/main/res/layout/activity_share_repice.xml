@@ -5,14 +5,18 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Share_RepiceActivity">
+    tools:context=".Share_RepiceActivity"
+    android:id="@+id/main"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Toolbar_share"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
-        android:elevation="4dp">
+        android:elevation="4dp"
+
+        >
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_LenSong"
@@ -45,33 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                >
                 <ImageView
                     android:id="@+id/anh_mon_an"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="230dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/share2"
+                    android:src="@drawable/share3"
                     />
-                <TextView
-                    android:id="@+id/img_Share"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Đăng hình đại diện món ăn"
-                    android:textColor="#A3A1A1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:drawableLeft="@drawable/baseline_camera_alt_24"
-                    android:drawablePadding="8dp"
-                    />
-            </FrameLayout>
             <androidx.cardview.widget.CardView
                 android:id="@+id/crView_TenMon"
                 android:layout_width="match_parent"

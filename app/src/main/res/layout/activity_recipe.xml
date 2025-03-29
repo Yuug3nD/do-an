@@ -40,7 +40,7 @@
                         android:id="@+id/btn_back"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:src="@drawable/baseline_arrow_back_24"
+                        android:src="@drawable/back2"
                         android:background="@null"/>
 
                     <View
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="Nguyên liệu"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textColor="@color/black"
                 android:paddingTop="16dp"
                 android:paddingLeft="25dp"
@@ -114,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biển"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 android:paddingTop="16dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"/>
@@ -122,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cách làm"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textColor="@color/black"
                 android:paddingTop="16dp"
                 android:paddingLeft="25dp"/>
@@ -132,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biểnSửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biểnSửa đổi, bổ sung một số điều của Nghị định số 40/2016/NĐ-CP ngày 15 tháng 5 năm 2016 của Chính phủ quy định chi tiết thi hành một số điều của Luật Tài nguyên, môi trường biển và hải đảo và Nghị định số 11/2021/NĐ-CP ngày 10 tháng 02 năm 2021 của Chính phủ quy định việc giao các khu vực biển nhất định cho tổ chức, cá nhân khai thác, sử dụng tài nguyên biển"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 android:paddingTop="16dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"/>
