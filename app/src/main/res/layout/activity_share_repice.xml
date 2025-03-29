@@ -45,33 +45,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <FrameLayout
+            <ImageView
+                android:id="@+id/anh_mon_an"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                >
-                <ImageView
-                    android:id="@+id/anh_mon_an"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/share2"
-                    />
-                <TextView
-                    android:id="@+id/img_Share"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Đăng hình đại diện món ăn"
-                    android:textColor="#A3A1A1"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:drawableLeft="@drawable/baseline_camera_alt_24"
-                    android:drawablePadding="8dp"
-                    />
-            </FrameLayout>
+                android:layout_height="230dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/share3"
+                />
             <androidx.cardview.widget.CardView
                 android:id="@+id/crView_TenMon"
                 android:layout_width="match_parent"

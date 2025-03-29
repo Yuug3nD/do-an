@@ -45,8 +45,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         Glide.with(context)
                 .load(item.getImage())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.logo7)
+                .error(R.drawable.logo7)
                 .into(holder.img);
 
         holder.itemView.setOnClickListener(v -> {

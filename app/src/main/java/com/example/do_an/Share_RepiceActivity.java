@@ -1,8 +1,11 @@
 package com.example.do_an;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -22,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +65,6 @@ public class Share_RepiceActivity extends AppCompatActivity {
     private EditText edtTenMon, edtThoiGian, edtNguyenLieu, edtCachLam;
     private Spinner spinnerCategory;
     private ImageView img;
-    private TextView imgShare;
     private MaterialButton btnLenSong;
     private Uri imageUri;
     private static final int PICK_IMAGE = 1;
@@ -82,6 +86,11 @@ public class Share_RepiceActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PICK_IMAGE);
+            }
+        }
 
         // Ánh xạ Spinner
         edtTenMon = findViewById(R.id.edtTex_TenMon);
@@ -91,7 +100,6 @@ public class Share_RepiceActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinner_Category);
         img = findViewById(R.id.anh_mon_an);
         btnLenSong = findViewById(R.id.btn_LenSong);
-        imgShare = findViewById(R.id.img_Share);
         btnBack = findViewById(R.id.btn_Back);
 
         // Khởi tạo Firebase
@@ -100,7 +108,7 @@ public class Share_RepiceActivity extends AppCompatActivity {
 
         imgurAPI = RetrofitClient.getClient().create(ImgurAPI.class);
 
-        imgShare.setOnClickListener(v -> openGallery());
+        img.setOnClickListener(v -> openGallery());
         // Sự kiện chọn ảnh
 //        imgShare.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -256,7 +264,6 @@ public class Share_RepiceActivity extends AppCompatActivity {
         cursor.close();
         return result;
     }
-
     private void uploadPost() {
         FirebaseUser user = auth.getCurrentUser();
         if (user == null) {
@@ -282,35 +289,70 @@ public class Share_RepiceActivity extends AppCompatActivity {
         if (postId == null || postId.isEmpty()) {
             postId = UUID.randomUUID().toString(); // Chỉ tạo mới khi đăng bài mới
         }
-
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Posts");
-
-        HashMap<String, Object> postMap = new HashMap<>();
-        postMap.put("postId", postId);
-        postMap.put("userId", userId);
-        postMap.put("title", title);
-        postMap.put("cookingTime", cookingTime);
-        postMap.put("ingredients", ingredients);
-        postMap.put("steps", steps);
-        postMap.put("category", category);
-        postMap.put("timestamp", System.currentTimeMillis());
-
-        databaseRef.child(postId).setValue(postMap)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(this, isEditing ? "Bài viết đã được cập nhật!" : "Bài viết đã được đăng!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(this, "Lỗi khi đăng bài: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        // Gửi kết quả về Intent để cập nhật dữ liệu trên Activity khác
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("postId", postId);
-        setResult(RESULT_OK, resultIntent);
-        finish();
+        if (imageUri == null) {
+            Toast.makeText(this, "Vui lòng chọn ảnh món ăn!", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (imageUri != null) {
+            uploadImageToCloudinary(userId, postId, title, cookingTime, ingredients, steps, category);
+        } else {
+            savePostToDatabase(userId, postId, title, cookingTime, ingredients, steps, category, null);
+        }
     }
+
+//    private void uploadPost() {
+//        FirebaseUser user = auth.getCurrentUser();
+//        if (user == null) {
+//            Toast.makeText(this, "Bạn cần đăng nhập để đăng bài!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        String userId = user.getUid();
+//        String title = edtTenMon.getText().toString().trim();
+//        String cookingTime = edtThoiGian.getText().toString().trim();
+//        String ingredients = edtNguyenLieu.getText().toString().trim();
+//        String steps = edtCachLam.getText().toString().trim();
+//        String category = spinnerCategory.getSelectedItem().toString();
+//
+//        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(cookingTime) ||
+//                TextUtils.isEmpty(ingredients) || TextUtils.isEmpty(steps) ||
+//                category.equals("Chọn loại món ăn")) {
+//            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        // Nếu postId không null (tức là đang chỉnh sửa), giữ nguyên
+//        if (postId == null || postId.isEmpty()) {
+//            postId = UUID.randomUUID().toString(); // Chỉ tạo mới khi đăng bài mới
+//        }
+//
+//        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Posts");
+//
+//        HashMap<String, Object> postMap = new HashMap<>();
+//        postMap.put("postId", postId);
+//        postMap.put("userId", userId);
+//        postMap.put("title", title);
+//        postMap.put("cookingTime", cookingTime);
+//        postMap.put("ingredients", ingredients);
+//        postMap.put("steps", steps);
+//        postMap.put("category", category);
+//        postMap.put("timestamp", System.currentTimeMillis());
+//
+//        databaseRef.child(postId).setValue(postMap)
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        Toast.makeText(this, isEditing ? "Bài viết đã được cập nhật!" : "Bài viết đã được đăng!", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    } else {
+//                        Toast.makeText(this, "Lỗi khi đăng bài: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//        // Gửi kết quả về Intent để cập nhật dữ liệu trên Activity khác
+//        Intent resultIntent = new Intent();
+//        resultIntent.putExtra("postId", postId);
+//        setResult(RESULT_OK, resultIntent);
+//        finish();
+//    }
 
 //    private void uploadPost() {
 //        FirebaseUser user = auth.getCurrentUser();
@@ -473,20 +515,50 @@ private void savePostToDatabase(String userId, String postId, String title, Stri
     postMap.put("ingredients", ingredients);
     postMap.put("steps", steps);
     postMap.put("category", category);
-    postMap.put("image", imageUrl); // Lưu link ảnh từ Cloudinary
     postMap.put("timestamp", System.currentTimeMillis());
+    if (imageUrl != null) {
+        postMap.put("image", imageUrl);
+    }
 
     databaseRef.child(postId).setValue(postMap)
             .addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Bài viết đã được chia sẻ!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, isEditing ? "Bài viết đã được cập nhật!" : "Bài viết đã được đăng!", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(this, "Lỗi khi đăng bài: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
+    // Gửi kết quả về Intent để cập nhật dữ liệu trên Activity khác
+    Intent resultIntent = new Intent();
+    resultIntent.putExtra("postId", postId);
+    setResult(RESULT_OK, resultIntent);
+    finish();
 }
-    private void loadPostData(String postId) {
+    private void uploadImageToCloudinary(String userId, String postId, String title, String cookingTime,
+                                         String ingredients, String steps, String category) {
+        File file = new File(getRealPathFromURI(imageUri)); // Chuyển URI sang File
+        CloudinaryHelper cloudinaryHelper = new CloudinaryHelper();
+
+        new Thread(() -> {
+            try {
+                String imageUrl = cloudinaryHelper.uploadImage(file);
+                runOnUiThread(() -> {
+                    if (imageUrl != null) {
+                        savePostToDatabase(userId, postId, title, cookingTime, ingredients, steps, category, imageUrl);
+                    } else {
+                        Toast.makeText(this, "Lỗi khi tải ảnh lên Cloudinary!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Lỗi khi tải ảnh lên Cloudinary: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
+    }
+    protected void loadPostData(String postId) {
         DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -511,11 +583,11 @@ private void savePostToDatabase(String userId, String postId, String title, Stri
                     }
                 }
 
-//                // Load ảnh lên ImageView bằng Glide
-//                String imageUrl = snapshot.child("imageUrl").getValue(String.class);
-//                if (imageUrl != null && !imageUrl.isEmpty()) {
-//                    Glide.with(Share_RepiceActivity.this).load(imageUrl).into(imageView);
-//                }
+                // Load ảnh lên bằng Glide
+                String imageUrl = snapshot.child("image").getValue(String.class);
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Glide.with(Share_RepiceActivity.this).load(imageUrl).into(img);
+                }
             }
 
             @Override

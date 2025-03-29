@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/logo7" />
 
             <ImageButton
                 android:id="@+id/btnSave"

@@ -84,15 +84,12 @@ public class RecipeActivity extends AppCompatActivity {
                 tvIngredients.setText(ingredients != null ? ingredients : "Không có nguyên liệu");
                 tvSteps.setText(steps != null ? steps : "Không có hướng dẫn");
 
-                // Load ảnh từ Firebase (nếu có)
-//                if (imageUrl != null && !imageUrl.isEmpty()) {
-//                    Glide.with(RecipeActivity.this)
-//                            .load(imageUrl)
-//                            .placeholder(R.drawable.placeholder) // Ảnh tạm trong lúc load
-//                            .into(imgRecipe);
-//                } else {0
-//                    imgRecipe.setImageResource(R.drawable.placeholder); // Ảnh mặc định
-//                }
+                // Load ảnh từ Firebase
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Glide.with(RecipeActivity.this)
+                            .load(imageUrl)
+                            .into(imgRecipe);
+                }
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 if (currentUser == null) {
                     btnEdit.setVisibility(View.GONE);
@@ -126,8 +123,8 @@ public class RecipeActivity extends AppCompatActivity {
             Intent intent1 = new Intent(RecipeActivity.this, Share_RepiceActivity.class);
             intent1.putExtra("postId", postId); // Gửi postId sang activity chỉnh sửa
             startActivity(intent1);
-            recreate();
         });
+
         btnDelete.setOnClickListener(v -> {
             new AlertDialog.Builder(RecipeActivity.this)
                     .setTitle("Xóa bài viết")
@@ -144,6 +141,50 @@ public class RecipeActivity extends AppCompatActivity {
                     })
                     .setNegativeButton("Hủy", null)
                     .show();
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadPostData(postId);
+    }
+    private void loadPostData(String postId) {
+        DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(RecipeActivity.this, "Công thức không tồn tại!", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
+
+                // Lấy thông tin từ Firebase
+                String title = snapshot.child("title").getValue(String.class);
+                String time = snapshot.child("cookingTime").getValue(String.class);
+                String ingredients = snapshot.child("ingredients").getValue(String.class);
+                String steps = snapshot.child("steps").getValue(String.class);
+                String imageUrl = snapshot.child("image").getValue(String.class);
+
+                // Cập nhật giao diện
+                tvTitle.setText(title != null ? title : "Không có tiêu đề");
+                tvTime.setText(time != null ? time : "Không có thời gian");
+                tvIngredients.setText(ingredients != null ? ingredients : "Không có nguyên liệu");
+                tvSteps.setText(steps != null ? steps : "Không có hướng dẫn");
+
+                // Load ảnh từ Firebase
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Glide.with(RecipeActivity.this)
+                            .load(imageUrl)
+                            .into(imgRecipe);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(RecipeActivity.this, "Lỗi tải dữ liệu!", Toast.LENGTH_SHORT).show();
+                Log.e("FirebaseError", error.getMessage());
+            }
         });
     }
 }
