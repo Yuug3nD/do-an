@@ -206,22 +206,22 @@ public class Share_RepiceActivity extends AppCompatActivity {
             img.setImageURI(imageUri);  // Hiển thị ảnh đã chọn
         }
     }
-    private void uploadImageToCloudinary() {
-        if (imageUri == null) {
-            Toast.makeText(this, "Vui lòng chọn ảnh!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        File file = new File(getRealPathFromURI(imageUri)); // Chuyển URI sang File
-        CloudinaryHelper cloudinaryHelper = new CloudinaryHelper();
-
-        new Thread(() -> {
-            String imageUrl = cloudinaryHelper.uploadImage(file);
-            if (imageUrl != null) {
-                saveImageUrlToFirebase(imageUrl); // Sau khi có URL, lưu vào Firebase
-            }
-        }).start();
-    }
+//    private void uploadImageToCloudinary() {
+//        if (imageUri == null) {
+//            Toast.makeText(this, "Vui lòng chọn ảnh!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        File file = new File(getRealPathFromURI(imageUri)); // Chuyển URI sang File
+//        CloudinaryHelper cloudinaryHelper = new CloudinaryHelper();
+//
+//        new Thread(() -> {
+//            String imageUrl = cloudinaryHelper.uploadImage(file);
+//            if (imageUrl != null) {
+//                saveImageUrlToFirebase(imageUrl); // Sau khi có URL, lưu vào Firebase
+//            }
+//        }).start();
+//    }
 
 
     private String encodeImageToBase64(Uri imageUri) throws IOException {
@@ -310,11 +310,13 @@ public class Share_RepiceActivity extends AppCompatActivity {
         // Nếu postId không null (tức là đang chỉnh sửa), giữ nguyên
         if (postId == null || postId.isEmpty()) {
             postId = UUID.randomUUID().toString(); // Chỉ tạo mới khi đăng bài mới
+            if (imageUri == null) {
+                Toast.makeText(this, "Vui lòng chọn ảnh món ăn!", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
-        if (imageUri == null) {
-            Toast.makeText(this, "Vui lòng chọn ảnh món ăn!", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (imageUri != null) {
+
+        if (imageUri != null) {
             uploadImageToCloudinary(userId, postId, title, cookingTime, ingredients, steps, category);
         } else {
             savePostToDatabase(userId, postId, title, cookingTime, ingredients, steps, category, null);
