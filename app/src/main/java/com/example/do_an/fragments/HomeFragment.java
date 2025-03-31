@@ -5,17 +5,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,10 +30,8 @@ import com.example.do_an.adapter.FoodAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,13 +41,13 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class HomeFragment extends Fragment {
-    EditText  edtSearch;
+    EditText edtSearch;
     RecyclerView rvsShare;
     FoodAdapter foodAdapter;
     ArrayList<FoodItem> ListFood;
     private ImageView imgMain, imgSalad, imgDrink, imgDesert;
     private TextView tvMain, tvSalad, tvDrink, tvDesert;
-
+    NestedScrollView nestedScrollView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -59,11 +60,11 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         rvsShare = view.findViewById(R.id.rv_popular);
-        edtSearch=view.findViewById(R.id.edtSearch);
+        edtSearch = view.findViewById(R.id.edtSearch);
+        nestedScrollView = view.findViewById(R.id.scroll_view);
 
         LoadData();
         loadCategoriesFromFirestore(view);
-
 
         rvsShare.setLayoutManager(new LinearLayoutManager(getContext()));
         foodAdapter = new FoodAdapter(ListFood);
@@ -82,8 +83,17 @@ public class HomeFragment extends Fragment {
         tvDrink = view.findViewById(R.id.drink);
         imgDesert = view.findViewById(R.id.img_desert);
         tvDesert = view.findViewById(R.id.desert);
-        return  view;
+
+        rvsShare.setNestedScrollingEnabled(false);
+        rvsShare.setLayoutManager(new LinearLayoutManager(getContext()));
+        foodAdapter = new FoodAdapter(ListFood);
+        rvsShare.setAdapter(foodAdapter);
+
+
+
+        return view;
     }
+
     void LoadData() {
         ListFood = new ArrayList<>();
 
@@ -103,7 +113,7 @@ public class HomeFragment extends Fragment {
                     if (foodItem != null) {
                         // Kiểm tra nếu category bị null thì gán giá trị mặc định
                         if (foodItem.getCategory() == null) {
-                            foodItem.setCategory("Chưa phân loại"); // ✅ Gán category mặc định
+                            foodItem.setCategory("Chưa phân loại");
                         }
                         ListFood.add(foodItem);
                     }
@@ -121,10 +131,9 @@ public class HomeFragment extends Fragment {
         });
     }
 
-
     private void loadCategoriesFromFirestore(View view) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance()
-                .getReference("Category"); // ✅ Trỏ đúng đến bảng "categories"
+                .getReference("Category");
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override

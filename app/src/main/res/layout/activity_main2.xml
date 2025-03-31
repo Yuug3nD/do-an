@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6FE5F5E6"
-    tools:context=".MainActivity"
-    android:id="@+id/main">
+    tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    <!-- Nội dung chính -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/viewSeparator"
-        />
+        android:background="#6FE5F5E6"
+        android:id="@+id/main">
 
-    <View
-        android:id="@+id/viewSeparator"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/navBottom"
-        android:background="#BDBDBD"/>
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/viewSeparator"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/mnbottom"
-        android:background="@color/white"
-        />
-</RelativeLayout>
+        <View
+            android:id="@+id/viewSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@id/navBottom"
+            android:background="#BDBDBD"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/mnbottom"
+            android:background="@color/white"/>
+    </RelativeLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
