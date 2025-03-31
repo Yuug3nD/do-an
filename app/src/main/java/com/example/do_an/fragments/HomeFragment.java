@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class HomeFragment extends Fragment implements CategoryAdapter.OnCategoryClickListener {
-    EditText  edtSearch;
+    SearchView edtSearch;
     RecyclerView rvsShare, rcvCategory;
     FoodAdapter foodAdapter;
     ArrayList<FoodItem> ListFood;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         rvsShare = view.findViewById(R.id.rv_popular);
-        edtSearch=view.findViewById(R.id.edtSearch);
+        edtSearch=view.findViewById(R.id.searchView);
         rcvCategory = view.findViewById(R.id.rcv_category_home);
         setUpRecyclerView();
         LoadData();
