@@ -12,7 +12,6 @@ public class FirebaseDatabaseHelper {
     private DatabaseReference databaseReference;
 
     public FirebaseDatabaseHelper() {
-        // Thay "foods" bằng node chứa dữ liệu của bạn
         databaseReference = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://doanmobile-t13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .child("foods");

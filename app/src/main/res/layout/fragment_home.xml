@@ -22,26 +22,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardSearch"
+    <EditText
+        android:id="@+id/edtSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
+        android:background="@drawable/search_edit_background"
+        android:drawablePadding="8dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Tìm món ăn..."
+        android:inputType="text"
+        android:paddingStart="55dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtIntro">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:queryHint="Tìm món ăn..."/>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/txtIntro" />
+    <ImageView
+        android:id="@+id/search"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@drawable/img"
+        app:layout_constraintStart_toStartOf="@+id/edtSearch"
+        app:layout_constraintTop_toTopOf="@+id/edtSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/edtSearch"/>
 
     <TextView
         android:id="@+id/txtLoai"
@@ -52,7 +60,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/cardSearch"
+        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
         tools:layout_editor_absoluteX="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView

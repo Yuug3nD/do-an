@@ -13,7 +13,7 @@
         android:id="@+id/Toolbar_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ECE7E7"
+        android:background="#BFBFEA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
