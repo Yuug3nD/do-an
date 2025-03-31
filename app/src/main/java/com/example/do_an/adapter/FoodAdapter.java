@@ -88,14 +88,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             holder.btnSave.setVisibility(View.GONE); // Nếu chưa đăng nhập, ẩn nút Save
             return;
         }
-        String currentUserId = user.getUid();
-        String postOwnerId = foodItem.getUserId();
-
-        if (currentUserId.equals(postOwnerId)) {
-            holder.btnSave.setVisibility(View.GONE);
-        } else {
-            holder.btnSave.setVisibility(View.VISIBLE);
-        }
 
         DatabaseReference savedRef = FirebaseDatabase.getInstance()
                 .getReference("SavedPosts")
