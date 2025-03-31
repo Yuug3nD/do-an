@@ -8,6 +8,7 @@
     android:layout_marginBottom="5dp"
     android:layout_marginEnd="16dp"
     app:cardCornerRadius="15dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     >
 
     <LinearLayout
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tên món ăn"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="20dp"/>
@@ -66,6 +67,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/baseline_bookmark_border_24"/>
         </RelativeLayout>
