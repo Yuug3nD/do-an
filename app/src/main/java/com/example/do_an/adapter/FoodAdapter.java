@@ -18,7 +18,6 @@ import com.example.do_an.FoodItem;
 import com.example.do_an.R;
 import com.example.do_an.RecipeActivity;
 import com.example.do_an.Utils;
-import com.example.do_an.database.SaveManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -84,6 +83,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         if (user == null) {
             holder.btnSave.setVisibility(View.GONE); // Nếu chưa đăng nhập, ẩn nút Save
             return;
+        }
+        String currentUserId = user.getUid();
+        String postOwnerId = foodItem.getUserId();
+
+        if (currentUserId.equals(postOwnerId)) {
+            holder.btnSave.setVisibility(View.GONE);
+        } else {
+            holder.btnSave.setVisibility(View.VISIBLE);
         }
 
         DatabaseReference savedRef = FirebaseDatabase.getInstance()
