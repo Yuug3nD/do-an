@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.example.do_an.Category;
 import com.example.do_an.CategoryActivity;
-import com.example.do_an.CategoryNewActivity;
 import com.example.do_an.FoodItem;
 import com.example.do_an.R;
 import com.example.do_an.SearchActivity;
