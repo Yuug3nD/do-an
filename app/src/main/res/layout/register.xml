@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:id="@+id/tv_name_category"
+    android:theme="@style/Theme.Material3.DayNight"
     >
 
     <ImageButton
