@@ -1,6 +1,7 @@
 package com.example.do_an.fragments;
 
-import static android.widget.GridLayout.HORIZONTAL;
+import static androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL;
+import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,19 +9,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.do_an.Category;
@@ -33,10 +31,8 @@ import com.example.do_an.adapter.FoodAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,7 +46,6 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
     RecyclerView rvsShare, rcvCategory;
     FoodAdapter foodAdapter;
     ArrayList<FoodItem> ListFood;
-   NestedScrollView nestedScrollView;
 
     private CategoryAdapter adapter = new CategoryAdapter(this);
 
@@ -64,8 +59,6 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        nestedScrollView = view.findViewById(R.id.nest_sroll);
 
         rvsShare = view.findViewById(R.id.rv_popular);
         edtSearch=view.findViewById(R.id.edtSearch);
@@ -86,7 +79,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
     }
 
     private void setUpRecyclerView() {
-        rcvCategory.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        rcvCategory.setLayoutManager(new LinearLayoutManager(getContext(), HORIZONTAL, false));
         rcvCategory.setAdapter(adapter);
     }
 
