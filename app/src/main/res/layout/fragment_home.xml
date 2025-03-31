@@ -31,11 +31,11 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/search_edit_background"
         android:drawablePadding="8dp"
-        android:paddingStart="55dp"
         android:ems="10"
         android:focusable="false"
         android:hint="Tìm món ăn..."
         android:inputType="text"
+        android:paddingStart="55dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,119 +55,21 @@
         android:id="@+id/txtLoai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
         android:text="Loại"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+        tools:layout_editor_absoluteX="16dp" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontal_view"
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_category_home"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLoai">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
-            android:orientation="vertical"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp">
-
-            <ImageView
-                android:id="@+id/img_main"
-                android:background="@drawable/category_card_bc"
-                app:srcCompat="@drawable/category_main"
-                style="@style/loai_style" />
-            <TextView
-                android:id="@+id/main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Món chính"
-                android:layout_below="@+id/img_main"
-                android:layout_alignStart="@+id/img_main"
-                android:layout_alignEnd="@+id/img_main"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="1dp"
-                android:gravity="center"
-                android:layout_marginBottom="-23dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-            <ImageView
-                android:id="@+id/img_salad"
-                android:background="@drawable/category_card_bc"
-                app:srcCompat="@drawable/salad"
-                style="@style/loai_style"
-                android:layout_marginStart="17dp"
-                android:layout_toEndOf="@+id/main"/>
-            <TextView
-                android:id="@+id/salad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salad"
-                android:layout_below="@+id/img_salad"
-                android:layout_alignStart="@+id/img_salad"
-                android:layout_alignEnd="@+id/img_salad"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="19dp"
-                android:gravity="center"
-                android:layout_marginBottom="-23dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-            <ImageView
-                android:id="@+id/img_drink"
-                android:background="@drawable/category_card_bc"
-                app:srcCompat="@drawable/catergory_drinks"
-                style="@style/loai_style"
-                android:layout_marginStart="17dp"
-                android:layout_toEndOf="@+id/salad"/>
-            <TextView
-                android:id="@+id/drink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đồ uống"
-                android:layout_below="@+id/img_drink"
-                android:layout_alignStart="@+id/img_drink"
-                android:layout_alignEnd="@+id/img_drink"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:layout_marginBottom="-23dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-
-            <ImageView
-                android:id="@+id/img_desert"
-                android:background="@drawable/category_card_bc"
-                app:srcCompat="@drawable/category_dessert"
-                style="@style/loai_style"
-                android:layout_marginStart="17dp"
-                android:layout_toEndOf="@+id/drink"/>
-            <TextView
-                android:id="@+id/desert"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tráng miệng"
-                android:layout_below="@+id/img_desert"
-                android:layout_alignStart="@+id/img_desert"
-                android:layout_alignEnd="@+id/img_desert"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="1dp"
-                android:gravity="center"
-                android:layout_marginBottom="-23dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-    </HorizontalScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/txtLoai" />
 
     <TextView
         android:id="@+id/popular_recipe"
@@ -177,21 +79,18 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/txtLoai"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_view"/>
+        app:layout_constraintTop_toBottomOf="@+id/rcv_category_home" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_popular"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popular_recipe"
-        tools:listitem="@layout/foodsave"
 
-        />
+        tools:listitem="@layout/foodsave" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

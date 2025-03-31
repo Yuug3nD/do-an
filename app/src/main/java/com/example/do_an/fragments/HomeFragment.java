@@ -1,5 +1,9 @@
 package com.example.do_an.fragments;
 
+import static androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL;
+import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,22 +19,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.example.do_an.Category;
 import com.example.do_an.CategoryActivity;
+import com.example.do_an.CategoryNewActivity;
 import com.example.do_an.FoodItem;
 import com.example.do_an.R;
 import com.example.do_an.SearchActivity;
+import com.example.do_an.adapter.CategoryAdapter;
 import com.example.do_an.adapter.FoodAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,19 +42,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CategoryAdapter.OnCategoryClickListener {
     EditText  edtSearch;
-    RecyclerView rvsShare;
+    RecyclerView rvsShare, rcvCategory;
     FoodAdapter foodAdapter;
     ArrayList<FoodItem> ListFood;
-    private ImageView imgMain, imgSalad, imgDrink, imgDesert;
-    private TextView tvMain, tvSalad, tvDrink, tvDesert;
 
+    private CategoryAdapter adapter = new CategoryAdapter(this);
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,10 +63,10 @@ public class HomeFragment extends Fragment {
 
         rvsShare = view.findViewById(R.id.rv_popular);
         edtSearch=view.findViewById(R.id.edtSearch);
-
+        rcvCategory = view.findViewById(R.id.rcv_category_home);
+        setUpRecyclerView();
         LoadData();
-        loadCategoriesFromFirestore(view);
-
+        loadCategoriesFromFirestore();
 
         rvsShare.setLayoutManager(new LinearLayoutManager(getContext()));
         foodAdapter = new FoodAdapter(ListFood);
@@ -73,17 +76,14 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        // Lấy tham chiếu View từ layout
-        imgMain = view.findViewById(R.id.img_main);
-        tvMain = view.findViewById(R.id.main);
-        imgSalad = view.findViewById(R.id.img_salad);
-        tvSalad = view.findViewById(R.id.salad);
-        imgDrink = view.findViewById(R.id.img_drink);
-        tvDrink = view.findViewById(R.id.drink);
-        imgDesert = view.findViewById(R.id.img_desert);
-        tvDesert = view.findViewById(R.id.desert);
         return  view;
     }
+
+    private void setUpRecyclerView() {
+        rcvCategory.setLayoutManager(new LinearLayoutManager(getContext(), HORIZONTAL, false));
+        rcvCategory.setAdapter(adapter);
+    }
+
     void LoadData() {
         ListFood = new ArrayList<>();
 
@@ -121,38 +121,22 @@ public class HomeFragment extends Fragment {
         });
     }
 
-
-    private void loadCategoriesFromFirestore(View view) {
+    private void loadCategoriesFromFirestore() {
         DatabaseReference dbRef = FirebaseDatabase.getInstance()
-                .getReference("Category"); // ✅ Trỏ đúng đến bảng "categories"
+                .getReference("Category");
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<DataSnapshot> categories = new ArrayList<>();
-
-                // Log toàn bộ dữ liệu trả về từ Firebase
-                Log.d("Firebase", "Data received: " + dataSnapshot.getValue());
+                List<Category> categories = new ArrayList<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    categories.add(snapshot);
+                    Category category = snapshot.getValue(Category.class);
+                    if (category != null) {
+                        categories.add(category);
+                    }
                 }
-
-                if (categories.size() >= 4) {
-                    // Lấy 4 danh mục đầu tiên
-                    DataSnapshot catMain = categories.get(0);
-                    DataSnapshot catSalad = categories.get(1);
-                    DataSnapshot catDrink = categories.get(2);
-                    DataSnapshot catDesert = categories.get(3);
-
-                    // Kiểm tra log từng danh mục
-                    Log.d("Firebase", "Main Category: " + catMain.getValue());
-                    Log.d("Firebase", "Salad Category: " + catSalad.getValue());
-                    Log.d("Firebase", "Drink Category: " + catDrink.getValue());
-                    Log.d("Firebase", "Desert Category: " + catDesert.getValue());
-                } else {
-                    Log.e("Firebase", "Không đủ danh mục (phải có ít nhất 4 danh mục)");
-                }
+                adapter.submitList(categories);
             }
 
             @Override
@@ -165,27 +149,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onClick();
     }
 
-    public void onClick() {
-        Map<ImageView, TextView> map = new HashMap<>();
-        map.put(imgMain, tvMain);
-        map.put(imgSalad, tvSalad);
-        map.put(imgDrink, tvDrink);
-        map.put(imgDesert, tvDesert);
-
-        View.OnClickListener listener = v -> {
-            TextView categoryText = map.get(v);
-            if (categoryText != null) {
-                Intent intent = new Intent(getActivity(), CategoryActivity.class);
-                intent.putExtra("category", categoryText.getText().toString());
-                startActivity(intent);
-            }
-        };
-
-        for (ImageView img : map.keySet()) {
-            img.setOnClickListener(listener);
-        }
+    @Override
+    public void onCategoryClick(Category category) {
+        Intent intent = new Intent(getActivity(), CategoryActivity.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
     }
 }

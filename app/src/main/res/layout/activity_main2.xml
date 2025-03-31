@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#6FE5F5E6"
     tools:context=".MainActivity"
-    android:id="@+id/main">
+    android:id="@+id/tv_name_category">
 
     <FrameLayout
         android:id="@+id/fragmentContainer"

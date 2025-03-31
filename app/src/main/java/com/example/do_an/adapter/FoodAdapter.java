@@ -40,6 +40,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         this.listFood = (listFood != null) ? listFood : new ArrayList<>();
     }
 
+    public void setListFood(ArrayList<FoodItem> listFood) {
+        this.listFood = (listFood != null) ? listFood : new ArrayList<>();
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override

@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Share_RepiceActivity"
-    android:id="@+id/main"
+    android:id="@+id/tv_name_category"
     >
 
     <androidx.appcompat.widget.Toolbar
