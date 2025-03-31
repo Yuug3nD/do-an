@@ -25,7 +25,7 @@
             android:textColor="@color/white"
             android:layout_gravity="end"
             android:layout_marginRight="10dp"
-            android:backgroundTint="#469E10"/>
+            android:backgroundTint="@color/lavender"/>
 
         <ImageButton
             android:id="@+id/btn_Back"

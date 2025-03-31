@@ -12,7 +12,7 @@
         android:id="@+id/user_Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0E520E"
+        android:background="@color/lavender"
         android:gravity="center"
         android:padding="40dp"
         android:text="Kho món ngon của bạn"
@@ -79,6 +79,6 @@
         android:src="@drawable/baseline_add_24"
         android:layout_gravity="bottom|end"
         android:layout_height="wrap_content"
-        android:backgroundTint="#B4FBB5"
+        android:backgroundTint="#FCDEDEFF"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
