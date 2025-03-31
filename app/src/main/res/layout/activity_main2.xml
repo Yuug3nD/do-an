@@ -6,19 +6,25 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#6FE5F5E6"
-        android:id="@+id/main">
+        android:background="@color/white"
+        android:id="@+id/main"
+
+        >
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/viewSeparator"/>
+            android:layout_above="@id/viewSeparator"
+            android:background="@color/black"
+            />
 
         <View
             android:id="@+id/viewSeparator"
@@ -33,16 +39,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/mnbottom"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
+        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemIconTint="@color/lavender"
+        app:itemIconTint="#469E10"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"/>
 

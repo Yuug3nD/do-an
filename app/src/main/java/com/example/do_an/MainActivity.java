@@ -12,21 +12,13 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.do_an.fragments.HomeFragment;
-import com.example.do_an.fragments.SettingFragment;
-import com.example.do_an.fragments.saveFragment;
-import com.example.do_an.fragments.shareFragment;
 import com.example.do_an.fragments.userFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -52,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mnBottom = findViewById(R.id.navBottom);
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view); // Đảm bảo navigationView không bị null
-
+        navigationView = findViewById(R.id.nav_view);
         if (navigationView == null) {
             Log.e("MainActivity", "NavigationView is NULL! Kiểm tra ID trong XML.");
         } else {
@@ -112,11 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.share) {
                     getSupportActionBar().setTitle(item.getTitle());
                     fmNew = new userFragment();
-                    loadFragment(fmNew);
-                    return true;
-                }if (item.getItemId() == R.id.setting) {
-                    getSupportActionBar().setTitle(item.getTitle());
-                    fmNew = new SettingFragment();
                     loadFragment(fmNew);
                     return true;
                 }

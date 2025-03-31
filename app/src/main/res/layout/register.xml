@@ -11,13 +11,13 @@
         android:id="@+id/Back_Register"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:background="@android:color/transparent"
         android:paddingEnd="20dp"
         android:src="@drawable/baseline_arrow_back_ios_24"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         />
     <View
         android:id="@+id/View_Register"
@@ -175,7 +175,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/lavender"
+                android:backgroundTint="#469E10"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/Check_Password"

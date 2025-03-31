@@ -105,14 +105,17 @@
                 android:textStyle="bold"
                 android:letterSpacing="0.1"
                 android:textColor="@android:color/black"
-                app:backgroundTint="@android:color/transparent"
+                app:backgroundTint="@color/white"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"
+                app:elevation="0dp"
                 android:gravity="center"
+                app:cornerRadius="30dp"
                 android:layout_margin="35dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/card_Password"/>
+
 
             <TextView
                 android:id="@+id/QuenMatKhau"
@@ -223,7 +226,7 @@
                 android:textStyle="bold"
                 android:letterSpacing="0.1"
                 android:textSize="20sp"
-                android:backgroundTint="@color/lavender"
+                android:backgroundTint="#469E10"
                 android:layout_margin="35dp"
                 app:layout_constraintTop_toBottomOf="@id/ln_btn"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

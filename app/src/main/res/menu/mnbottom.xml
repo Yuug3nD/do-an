@@ -2,15 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Food and Drink"
+        android:title="Thức Ăn &amp; Nước Uống"
         android:id="@+id/food"
         android:icon="@drawable/food"/>
     <item
-        android:title="Share"
+        android:title="Kho món ngon của bạn"
         android:id="@+id/share"
-        android:icon="@drawable/baseline_ios_share_24"/>
-    <item
-        android:title="Setting"
-        android:id="@+id/setting"
-        android:icon="@drawable/baseline_format_list_bulleted_24"/>
+        android:icon="@drawable/baseline_book_24"/>
 </menu>
