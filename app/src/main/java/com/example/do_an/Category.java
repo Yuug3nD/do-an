@@ -1,14 +1,18 @@
 package com.example.do_an;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
+    private String id;
     private String name;
-    private String imageUrl;
+    private String image;
 
-    public Category() { }
+    public String getId() {
+        return id;
+    }
 
-    public Category(String name, String imageUrl) {
-        this.name = name;
-        this.imageUrl = imageUrl;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -19,12 +23,12 @@ public class Category {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 

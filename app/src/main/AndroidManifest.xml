@@ -21,6 +21,9 @@
         android:theme="@style/Theme.Doan"
         tools:targetApi="31">
         <activity
+            android:name=".CategoryNewActivity"
+            android:exported="false" />
+        <activity
             android:name=".CategoryActivity"
             android:exported="true"></activity>
         <activity
@@ -31,33 +34,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            >
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            >
-
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".RecipeActivity"
             android:exported="true" />
         <activity
             android:name=".Share_RepiceActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name=".SearchActivity"
             android:exported="true"></activity>

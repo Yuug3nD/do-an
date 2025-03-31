@@ -3,8 +3,10 @@ package com.example.do_an;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.EdgeToEdge;
@@ -26,27 +28,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CategoryActivity extends AppCompatActivity{
     Toolbar toolbar;
-
     FoodAdapter foodAdapter;
-    ArrayList<FoodItem> ListFood;
-
+    ArrayList<FoodItem> ListFood = new ArrayList<>();;
     RecyclerView recyclerView;
     TextView tvCategory;
     ImageButton imgBack;
+    private Category mCategory;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_category);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tv_name_category), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -60,62 +65,40 @@ public class CategoryActivity extends AppCompatActivity{
 
         imgBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
-        Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
-        tvCategory.setText(category);
-
-        LoadData();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         foodAdapter = new FoodAdapter(ListFood);
         recyclerView.setAdapter(foodAdapter);
 
-       loadCategoryFragment();
+        Intent intent = getIntent();
+        mCategory = (Category) intent.getSerializableExtra("category");
+        tvCategory.setText(Objects.requireNonNull(mCategory).getName());
+
+        LoadData();
+
     }
 
     void LoadData() {
-        ListFood = new ArrayList<>();
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
                 .getReference("Posts");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ListFood.clear(); // Xóa danh sách cũ để cập nhật danh sách mới
-
+                ListFood.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Tạo một đối tượng FoodItem từ dữ liệu Firebase
                     FoodItem foodItem = snapshot.getValue(FoodItem.class);
-
-                    // Kiểm tra nếu dữ liệu hợp lệ thì thêm vào danh sách
-                    if (foodItem != null) {
-                        // Kiểm tra nếu category bị null thì gán giá trị mặc định
-                        if (foodItem.getCategory() == null) {
-                            foodItem.setCategory("Chưa phân loại"); // ✅ Gán category mặc định
-                        }
+                    if (mCategory.getId().equals(foodItem.getCategory())) {
                         ListFood.add(foodItem);
                     }
                 }
-
-                // Cập nhật RecyclerView sau khi lấy dữ liệu từ Firebase
-                foodAdapter.notifyDataSetChanged();
+               foodAdapter.setListFood(ListFood);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Xử lý lỗi khi lấy dữ liệu
                 System.out.println("Lỗi khi lấy dữ liệu: " + databaseError.getMessage());
             }
         });
     }
-
-    private void loadCategoryFragment() {
-        Fragment fragment = new Category_ViewFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.Frame_Category, fragment);
-        transaction.commit();
-    }
-
-
 }
