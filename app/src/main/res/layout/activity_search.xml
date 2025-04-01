@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:queryHint="Nhập tên món ăn"/>
+        app:queryHint="Nhập tên món ăn"
+        />
 
 </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView

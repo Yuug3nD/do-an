@@ -50,6 +50,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:dividerInsetStart="25dp"
         app:itemIconTint="#469E10"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"/>

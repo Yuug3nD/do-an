@@ -5,6 +5,7 @@ import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,12 +20,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.do_an.Category;
 import com.example.do_an.CategoryActivity;
 import com.example.do_an.FoodItem;
+import com.example.do_an.MainActivity;
 import com.example.do_an.R;
 import com.example.do_an.SearchActivity;
 import com.example.do_an.adapter.CategoryAdapter;
@@ -47,6 +50,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
     RecyclerView rvsShare, rcvCategory;
     FoodAdapter foodAdapter;
     ArrayList<FoodItem> ListFood;
+    ImageButton menuDrawer;
 
     private CategoryAdapter adapter = new CategoryAdapter(this);
 
@@ -74,6 +78,18 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
         edtSearch.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);
+        });
+
+
+        // Tìm ImageButton
+        menuDrawer = view.findViewById(R.id.menu_drawer);
+
+        // Gán sự kiện cho ImageButton
+        menuDrawer.setOnClickListener(v -> {
+            // Gọi phương thức từ MainActivity để mở Drawer
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openDrawer();
+            }
         });
 
         return  view;

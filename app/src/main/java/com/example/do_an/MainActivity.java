@@ -179,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new HomeFragment());
 
     }
-
-
     // hàm load fragment
     void loadFragment(Fragment fmNew)
     {
@@ -188,5 +186,10 @@ public class MainActivity extends AppCompatActivity {
         fmTran.replace(R.id.fragmentContainer, fmNew);
         fmTran.addToBackStack(null);
         fmTran.commit();
+    }
+    public void openDrawer() {
+        if (drawerLayout != null) {
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }
