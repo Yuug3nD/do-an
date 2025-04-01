@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Nếu có tên trong Firebase Authentication
             if (displayName != null && !displayName.isEmpty()) {
-                tvHello.setText("Xin chào, " + displayName);
+                tvHello.setText("Xin chào,");
                 tvUserName.setText(displayName);
                 tvUserEmail.setText(user.getEmail());
             } else {
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User userData = dataSnapshot.getValue(User.class);
                         if (userData != null) {
-                            tvHello.setText("Xin chào, " + userData.getName());
+                            tvHello.setText("Xin chào,");
                             tvUserName.setText(userData.getName());
                             tvUserEmail.setText(user.getEmail());
                         }
@@ -213,7 +213,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        } else {
+//        } else {
+//            // Nếu người dùng chưa đăng nhập
+//            tvHello.setText("Xin chào,");
+//            tvUserName.setText("Hãy đăng nhập để chia sẻ món ăn của bạn nhé !");
+//            tvUserEmail.setText(""); // Không có email nếu chưa đăng nhập
+//        }
+            Menu menu = navigationView.getMenu();
+            MenuItem loginItem = menu.findItem(R.id.nav_login);
+            //hien chu dang nhap thanh doi tai khoan
+            loginItem.setTitle("Đổi tài khoản");
+        }
+        if (user == null) {
             // Nếu người dùng chưa đăng nhập
             tvHello.setText("Xin chào,");
             tvUserName.setText("Hãy đăng nhập để chia sẻ món ăn của bạn nhé !");
@@ -223,11 +234,15 @@ public class MainActivity extends AppCompatActivity {
     private void logoutUser() {
         FirebaseAuth.getInstance().signOut();
 
+        setUserInfo();
+
         Menu menu = navigationView.getMenu();
+        MenuItem loginItem = menu.findItem(R.id.nav_login);
+        //hien chu dang nhap thanh doi tai khoan
+        loginItem.setTitle("Đăng nhập");
+        //ẩn item dang nhap
         MenuItem logoutItem = menu.findItem(R.id.nav_logout);
         logoutItem.setVisible(false);
-
-        setUserInfo();
 
         drawerLayout.closeDrawer(GravityCompat.START);
 
