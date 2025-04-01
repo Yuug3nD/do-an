@@ -71,33 +71,36 @@ public class CategoryActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         mCategory = (Category) intent.getSerializableExtra("category");
-        tvCategory.setText(Objects.requireNonNull(mCategory).getName());
 
-        LoadData();
+        if (mCategory != null) {
+            tvCategory.setText(mCategory.getName());
+            LoadData();
+        }
 
     }
 
     void LoadData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("Posts");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ListFood.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     FoodItem foodItem = snapshot.getValue(FoodItem.class);
-                    if (mCategory.getId().equals(foodItem.getCategory())) {
+
+                    if (foodItem != null && foodItem.getCategory() != null &&
+                            foodItem.getCategory().equals(mCategory.getName())) { // Chỉ lấy món thuộc category hiện tại
                         ListFood.add(foodItem);
                     }
                 }
-               foodAdapter.setListFood(ListFood);
+                foodAdapter.setListFood(ListFood);
+                foodAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("Lỗi khi lấy dữ liệu: " + databaseError.getMessage());
+                Log.e("Firebase", "Lỗi khi lấy dữ liệu: " + databaseError.getMessage());
             }
         });
     }
