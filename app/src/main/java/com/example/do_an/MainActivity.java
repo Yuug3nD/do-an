@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.app.AlertDialog;
+import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -25,6 +26,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView mnBottom;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private TextView tvHello, tvUserName, tvUserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         mnBottom = findViewById(R.id.navBottom);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+        View headerView = navigationView.getHeaderView(0);  // Lấy view header từ NavigationView
+        tvHello = headerView.findViewById(R.id.tv_Hello);
+        tvUserName = headerView.findViewById(R.id.tv_user_name);
+        tvUserEmail = headerView.findViewById(R.id.tv_user_email);
+
         if (navigationView == null) {
             Log.e("MainActivity", "NavigationView is NULL! Kiểm tra ID trong XML.");
         } else {
@@ -73,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
+        // Lấy thông tin người dùng và hiển thị
+        setUserInfo();
     }
 
 
@@ -86,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
     @NonNull
     private NavigationBarView.OnItemSelectedListener getListener() {
         return new NavigationBarView.OnItemSelectedListener() {
@@ -166,6 +180,46 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Hủy", null)
                 .show();
     }
+    private void setUserInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String displayName = user.getDisplayName();
+
+            // Nếu có tên trong Firebase Authentication
+            if (displayName != null && !displayName.isEmpty()) {
+                tvHello.setText("Xin chào, " + displayName);
+                tvUserName.setText(displayName);
+                tvUserEmail.setText(user.getEmail());
+            } else {
+                // Nếu không có tên trong Firebase Authentication, lấy từ Realtime Database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference userRef = database.getReference("User").child(user.getUid());
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User userData = dataSnapshot.getValue(User.class);
+                        if (userData != null) {
+                            tvHello.setText("Xin chào, " + userData.getName());
+                            tvUserName.setText(userData.getName());
+                            tvUserEmail.setText(user.getEmail());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.e("DatabaseError", "Lỗi khi lấy dữ liệu: " + databaseError.getMessage());
+                    }
+                });
+            }
+        } else {
+            // Nếu người dùng chưa đăng nhập
+            tvHello.setText("Xin chào,");
+            tvUserName.setText("Hãy đăng nhập để chia sẻ món ăn của bạn nhé !");
+            tvUserEmail.setText(""); // Không có email nếu chưa đăng nhập
+        }
+    }
     private void logoutUser() {
         FirebaseAuth.getInstance().signOut();
 
@@ -173,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem logoutItem = menu.findItem(R.id.nav_logout);
         logoutItem.setVisible(false);
 
+        setUserInfo();
 
         drawerLayout.closeDrawer(GravityCompat.START);
 
