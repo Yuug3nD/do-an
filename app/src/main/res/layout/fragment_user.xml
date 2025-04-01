@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.userFragment"
-    android:background="@color/white"
+    android:background="#FBFBF9"
     >
 
     <TextView
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/user_Header"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/white"
+        android:background="#FBFBF9"
         android:elevation="1dp"
         app:tabIndicatorColor="#336D3A"
         app:tabSelectedTextColor="@color/black"
