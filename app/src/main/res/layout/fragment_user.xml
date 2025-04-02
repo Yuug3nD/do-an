@@ -51,6 +51,7 @@
         android:elevation="1dp"
         app:tabIndicatorColor="#336D3A"
         app:tabSelectedTextColor="@color/black"
+        android:theme="@style/Theme.Material3.DayNight"
         >
 
         <com.google.android.material.tabs.TabItem
@@ -82,5 +83,7 @@
         android:layout_gravity="bottom|end"
         android:layout_height="wrap_content"
         android:backgroundTint="#FCD2F8CD"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
