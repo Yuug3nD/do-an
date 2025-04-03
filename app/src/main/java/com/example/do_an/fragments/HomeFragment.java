@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.OnCategory
                     if (foodItem != null) {
                         // Kiểm tra nếu category bị null thì gán giá trị mặc định
                         if (foodItem.getCategory() == null) {
-                            foodItem.setCategory("Chưa phân loại"); // ✅ Gán category mặc định
+                            foodItem.setCategory("Chưa phân loại");
                         }
                         ListFood.add(foodItem);
                     }
