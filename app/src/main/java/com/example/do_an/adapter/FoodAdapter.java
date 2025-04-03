@@ -95,32 +95,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 .child(foodItem.getPostId());
 
         // Kiểm tra xem công thức đã được lưu chưa
-        savedRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        savedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isSaved = snapshot.exists();
+                savedPosts.put(foodItem.getPostId(), isSaved);
                 holder.btnSave.setImageResource(isSaved ? R.drawable.baseline_bookmark_24 : R.drawable.baseline_bookmark_border_24);
 
                 // Xử lý sự kiện click nút Save
-                holder.btnSave.setOnClickListener(v -> {
-                    if (isSaved) {
-                        // Nếu đã lưu, xóa khỏi Firebase và cập nhật giao diện ngay lập tức
-                        savedRef.removeValue()
-                                .addOnSuccessListener(aVoid -> {
-                                    holder.btnSave.setImageResource(R.drawable.baseline_bookmark_border_24);
-                                    Toast.makeText(context, "Đã xóa khỏi danh sách lưu!", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> Toast.makeText(context, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                    } else {
-                        // Nếu chưa lưu, thêm vào Firebase và cập nhật giao diện ngay lập tức
-                        savedRef.setValue(true)
-                                .addOnSuccessListener(aVoid -> {
-                                    holder.btnSave.setImageResource(R.drawable.baseline_bookmark_24);
-                                    Toast.makeText(context, "Đã lưu công thức!", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> Toast.makeText(context, "Lỗi khi lưu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                    }
-                });
+                holder.btnSave.setOnClickListener(v -> toggleSavePost(foodItem, holder));
             }
 
             @Override
